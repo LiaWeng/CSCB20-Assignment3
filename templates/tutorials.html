@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap"
+    rel="stylesheet">
+  <title>CSCB20</title>
+</head>
+
+<body>
+  {% extends "template.html" %}
+  {% block content %}
+
+  <div class="content">
+    <h1 class="page-title">Tutorial Sections</h1>
+    <p class="message">Please go to the tutorial section that you signed up for on ACORN.
+      The tutorial participation counts <strong>2%</strong> towards your final grade.
+    </p>
+
+    <div class="tutorials-sections">
+      <div class="description">
+        <h2>Tutorial Section 1</h2>
+        <ul>
+          <li>Location: BV473</li>
+          <li>Time: Monday 11-12pm</li>
+          <li>TA: Rick</li>
+        </ul>
+      </div>
+
+      <div class="description">
+        <h2>Tutorial Section 2</h2>
+        <ul>
+          <li>Location: BV473</li>
+          <li>Time: Monday 12-1pm</li>
+          <li>TA: Rick</li>
+        </ul>
+      </div>
+
+      <div class="description">
+        <h2>Tutorial Section 3</h2>
+        <ul>
+          <li>Location: BV473</li>
+          <li>Time: Tuesday 12-1pm</li>
+          <li>TA: Vidya</li>
+        </ul>
+      </div>
+
+      <div class="description">
+        <h2>Tutorial Section 4</h2>
+        <ul>
+          <li>Location: BV473</li>
+          <li>Time: Tuesday 1-2pm</li>
+          <li>TA: Vidya</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h1 class="page-title">Tutorial Materials</h1>
+    <p class="message"> The tutorials will begin from week 2. It will be online until the reading week. Afterwards we
+      will shift to fully in-person.
+      <br><br>
+      The recordings to the tutorials can be found
+      <a href="https://www.youtube.com/playlist?list=PLwcUQKZomKdsi3C4ur70Ao9zeGI8PpLeB">here</a>
+    </p>
+
+    <div class="description tut-description">
+      <h2>Week 2 - Python</h2>
+      <p>Materials: <a
+          href="https://nbviewer.org/github/LiaWeng/CSCB20-Assignment2/blob/main/src/dummy%20pdfs/tutorial.pdf"
+          target="_blank">Handout</a>
+      </p>
+    </div>
+
+    <div class="description tut-description">
+      <h2>Week 3 - Relational Algebra</h2>
+      <p>Materials: <a
+          href="https://nbviewer.org/github/LiaWeng/CSCB20-Assignment2/blob/main/src/dummy%20pdfs/tutorial.pdf"
+          target="_blank">Handout</a>
+      </p>
+    </div>
+
+    <div class="description tut-description">
+      <h2>Week 4 - SQL</h2>
+      <p>Materials: <a
+          href="https://nbviewer.org/github/LiaWeng/CSCB20-Assignment2/blob/main/src/dummy%20pdfs/tutorial.pdf"
+          target="_blank">Handout</a>
+      </p>
+    </div>
+
+    <div class="description tut-description">
+      <h2>Week 5 - More SQL, Introduction to HTML</h2>
+      <p>Materials: <a
+          href="https://nbviewer.org/github/LiaWeng/CSCB20-Assignment2/blob/main/src/dummy%20pdfs/tutorial.pdf"
+          target="_blank">Handout</a>
+      </p>
+    </div>
+
+    <div class="description tut-description">
+      <h2>Week 6 - Python Flask</h2>
+      <p>Materials: <a
+          href="https://nbviewer.org/github/LiaWeng/CSCB20-Assignment2/blob/main/src/dummy%20pdfs/tutorial.pdf"
+          target="_blank">Handout</a>
+      </p>
+    </div>
+
+    <div class="description tut-description">
+      <h2>Week 8 - Introduction to CSS</h2>
+      <p>Materials: <a
+          href="https://nbviewer.org/github/LiaWeng/CSCB20-Assignment2/blob/main/src/dummy%20pdfs/tutorial.pdf"
+          target="_blank">Handout</a>
+      </p>
+    </div>
+
+    <div class="description tut-description">
+      <h2>Week 9 - Introduction to Flexbox</h2>
+      <p>Materials: <a
+          href="https://nbviewer.org/github/LiaWeng/CSCB20-Assignment2/blob/main/src/dummy%20pdfs/tutorial.pdf"
+          target="_blank">Handout</a>
+      </p>
+    </div>
+
+    <div class="description tut-description">
+      <h2>Week 10 - Introduction to Javascript</h2>
+      <p>Materials: <a
+          href="https://nbviewer.org/github/LiaWeng/CSCB20-Assignment2/blob/main/src/dummy%20pdfs/tutorial.pdf"
+          target="_blank">Handout</a>
+      </p>
+    </div>
+  </div>
+
+  {% endblock %}
+</body>

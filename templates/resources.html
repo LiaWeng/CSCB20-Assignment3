@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap"
+    rel="stylesheet">
+  <title>CSCB20</title>
+</head>
+
+<body>
+  {% extends "template.html" %}
+  {% block content %}
+
+  <div class="content">
+    <h1 class="page-title">Additional Resources</h1>
+
+    <div class="description">
+      The resources listed below can be used as supplements to solidify your understanding of the course contents.
+      <ul>
+        <li>Intro to Relational Algebra: <a
+            href="https://nbviewer.org/github/afnanrahman/CSCB20-Assignment2/blob/231ff7d8d4ec1a488fbd4e49ff47d3eb774d456d/src/dummy%20pdfs/Resources.pptx">
+            Relational_Algebra.pdf</a> </li>
+        <li>Intro to SQL: <a
+            href="https://nbviewer.org/github/afnanrahman/CSCB20-Assignment2/blob/231ff7d8d4ec1a488fbd4e49ff47d3eb774d456d/src/dummy%20pdfs/Resources.pptx">
+            Intro_to_SQL.pptx</a> </li>
+        <li> Intro to Web Dev: <a
+            href="https://nbviewer.org/github/afnanrahman/CSCB20-Assignment2/blob/231ff7d8d4ec1a488fbd4e49ff47d3eb774d456d/src/dummy%20pdfs/Resources.pptx">
+            CSCB20_Intro_to_Web_Dev.pptx</a></li>
+        <li>DOM: <a
+            href="https://nbviewer.org/github/afnanrahman/CSCB20-Assignment2/blob/231ff7d8d4ec1a488fbd4e49ff47d3eb774d456d/src/dummy%20pdfs/Resources.pptx">
+            CSCB20_DOM_Slides.pptx</a> </li>
+        <li>HTML: <a
+            href="https://nbviewer.org/github/afnanrahman/CSCB20-Assignment2/blob/231ff7d8d4ec1a488fbd4e49ff47d3eb774d456d/src/dummy%20pdfs/Resources.pptx"
+            target="_blank">CSCB20_HTML_PPT</a></li>
+        <li>CSS: <a
+            href="https://nbviewer.org/github/afnanrahman/CSCB20-Assignment2/blob/231ff7d8d4ec1a488fbd4e49ff47d3eb774d456d/src/dummy%20pdfs/Resources.pptx"
+            target="_blank">CSCB20_CSS_Slides.pdf</a></li>
+        <li>JavaScript: <a
+            href="https://nbviewer.org/github/afnanrahman/CSCB20-Assignment2/blob/231ff7d8d4ec1a488fbd4e49ff47d3eb774d456d/src/dummy%20pdfs/Resources.pptx"
+            target="_blank">CSCB20_JavaScript_Slides.pdf</a></li>
+        <li>Git: <a
+            href="https://nbviewer.org/github/afnanrahman/CSCB20-Assignment2/blob/231ff7d8d4ec1a488fbd4e49ff47d3eb774d456d/src/dummy%20pdfs/Resources.pptx"
+            target="_blank">Git_Command_Line_Notes.pdf</a></li>
+      </ul>
+    </div>
+  </div>
+
+  {% endblock %}
+</body>

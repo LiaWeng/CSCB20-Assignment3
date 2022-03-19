@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap"
+    rel="stylesheet">
+  <title>CSCB20</title>
+</head>
+
+<body>
+  {% extends "template.html" %}
+  {% block content %}
+
+  <div class="content">
+    <div class="description">
+      <h2>Course Description</h2>
+      <p>A practical introduction to databases and Web app development. Databases: terminology and applications;
+        creating, querying and updating databases; the entity-relatinship model for database design. Web documents and
+        applications: static and interactive documens; Web servers and dynamic server-generated content; Web
+        application development and interface with databases.</p>
+      <ul>
+        <li>Prerequisite: Some experience with programming in an imperative language such as Python, Java or C.</li>
+        <li>Exclusion: This course may not be taken after - or concurrently with - any C- or D-level CSC course.</li>
+        <li>Syllabus Winter 2022: <a
+            href="https://nbviewer.org/github/LiaWeng/CSCB20-Assignment2/blob/main/src/dummy%20pdfs/syllabus.pdf"
+            target="_blank">PDF</a></li>
+      </ul>
+    </div>
+
+    <div class="description">
+      <h2>Instructor</h2>
+      <p>Purva Gawde</p>
+      <ul>
+        <li>Email: <a href="mailto:purva.gawde@utoronto.ca">purva.gawde@utoronto.ca
+          </a></li>
+        <li>Office: IC493 <a
+            href="https://www.waze.com/live-map/directions/ca/on/toronto/instructional-centre-(ic)?to=place.ChIJdxqz0I7b1IkRdkwjUbvS2Yk"
+            target="_blank"> (Directions)
+          </a>
+        </li>
+        <li>Phone: (416) 208-4745</li>
+        <li> Office Hours: Tuesday 10 - 11am (Online)</li>
+        <li><a href="https://utoronto.zoom.us/j/83542936911" target="_blank">Zoom Link</a> (Password: 003308)</li>
+      </ul>
+    </div>
+
+    <div class="description">
+      <h2>Lectures</h2>
+      Monday 9 - 11am
+      <ul>
+        <li>Online until Jan 31, 2022 (<a href="https://utoronto.zoom.us/j/83542936911" target="_blank">Zoom
+            Link</a>, Password: 113792)</li>
+        <li>Afterwards in HLB 101 <a
+            href="https://www.waze.com/live-map/directions/ca/on/toronto/instructional-centre-(ic)?to=place.ChIJdxqz0I7b1IkRdkwjUbvS2Yk"
+            target="_blank"> (Directions)</li>
+      </ul>
+    </div>
+
+    <div class="description">
+      <h2>Piazza</h2>
+      <a href="https://piazza.com/class/kxj5alixpjg4ft" target="_blank"></a>
+      <p>
+        Questions regarding the course material, assignments, midterm, etc. should be posed on the
+        Piazza. Questions about the assignment which you feel you cannot formulate without revealing
+        your solution (should be very rare!), as well as questions and concerns regarding your personal
+        matters should be directed to the instructor.
+      </p>
+    </div>
+  </div>
+
+  {% endblock %}
+</body>

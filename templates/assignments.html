@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap"
+    rel="stylesheet">
+  <title>CSCB20</title>
+</head>
+
+<body>
+  {% extends "template.html" %}
+  {% block content %}
+
+  <div class="content">
+    <h1 class="page-title">Assignments</h1>
+
+    <p class="message">
+      All exercises and assignments should be submitted on <a
+        href="https://markus.utsc.utoronto.ca/cscb20w22/assignments" target="_blank">Markus</a>.
+    </p>
+
+    <div class="description assignment-description">
+      <div class="left-column">
+        <h2>Assignment 1 -- Relational Algebra and SQL</h2>
+        <ul>
+          <li>Materials: <a
+              href="https://nbviewer.org/github/LiaWeng/CSCB20-Assignment2/blob/main/src/dummy%20pdfs/assignment.pdf"
+              target="_blank">Handout</a></li>
+          <li>Weight: 15%</li>
+        </ul>
+      </div>
+      <div class="right-column">
+        <h2>Due Dates</h2>
+        <ul>
+          <li>Part 1: Wednesday Feb. 1, 11:59pm. Submit <a href="https://markus.utsc.utoronto.ca/cscb20w22/assignments"
+              target="_blank">here</a>.
+          </li>
+          <li>Part 2 and 3: Friday Feb. 17, 11:59pm. Submit <a
+              href="https://markus.utsc.utoronto.ca/cscb20w22/assignments" target="_blank">here</a>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="description assignment-description">
+      <div class="left-column">
+        <h2>Assignment 2 -- HTML, CSS, PHP</h2>
+        <ul>
+          <li>Materials: <a
+              href="https://nbviewer.org/github/LiaWeng/CSCB20-Assignment2/blob/main/src/dummy%20pdfs/assignment.pdf"
+              target="_blank">Handout</a></li>
+          <li>Weight: 15%</li>
+        </ul>
+      </div>
+      <div class="right-column">
+        <h2>Due Dates</h2>
+        <ul>
+          <li>Part 1: Friday Mar. 10, 11:59pm. Submit <a href="https://markus.utsc.utoronto.ca/cscb20w22/assignments"
+              target="_blank">here</a>.
+          </li>
+          <li>Part 2: Sunday Mar. 19, 11:59pm. Submit <a href="https://markus.utsc.utoronto.ca/cscb20w22/assignments"
+              target="_blank">here</a>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="description assignment-description">
+      <div class="left-column">
+        <h2>Assignment 3 -- Web Application and Database</h2>
+        <ul>
+          <li>Materials: <a
+              href="https://nbviewer.org/github/LiaWeng/CSCB20-Assignment2/blob/main/src/dummy%20pdfs/assignment.pdf"
+              target="_blank">Handout</a>
+          </li>
+          <li>Weight: 15%</li>
+        </ul>
+      </div>
+      <div class="right-column">
+        <h2>Due Dates</h2>
+        <ul>
+          <li>Friday Mar. 31, 11:59pm. Submit here. Submit <a
+              href="https://markus.utsc.utoronto.ca/cscb20w22/assignments" target="_blank">here</a>.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  {% endblock %}
+</body>

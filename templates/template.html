@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap"
+    rel="stylesheet">
+  <title>CSCB20</title>
+</head>
+
+<body>
+  <div class="header">
+    <h1>CSCB20 Introduction to Databases and Web Applications</h1>
+  </div>
+
+  <div class="wrapper">
+    <nav>
+      <a href="{{ url_for('home') }}" class={% if page=="home" %} "selected" {% endif %}>
+        Home
+      </a>
+      <a href="{{ url_for('team') }}" class={% if page=="team" %} "selected" {% endif %}>
+        Course&nbsp;Team
+      </a>
+      <a href="{{ url_for('calendar') }}" class={% if page=="calendar" %} "selected" {% endif %}>
+        Calendar
+      </a>
+      <a href="{{ url_for('announcements') }}" class={% if page=="announcements" %} "selected" {% endif %}>
+        Announcements
+      </a>
+      <a href="{{ url_for('grades') }}" class={% if page=="grades" %} "selected" {% endif %}>
+        Grades
+      </a>
+      <a href="{{ url_for('lectures') }}" class={% if page=="lectures" %} "selected" {% endif %}>
+        Lectures
+      </a>
+      <a href="{{ url_for('tutorials') }}" class={% if page=="tutorials" %} "selected" {% endif %}>
+        Tutorials
+      </a>
+      <a href="{{ url_for('assignments') }}" class={% if page=="assignments" %} "selected" {% endif %}>
+        Assignments
+      </a>
+      <a href="{{ url_for('tests') }}" class={% if page=="tests" %} "selected" {% endif %}>
+        Tests
+      </a>
+      <a href="{{ url_for('faq') }}" class={% if page=="faq" %} "selected" {% endif %}>
+        FAQ
+      </a>
+      <a href="{{ url_for('resources') }}" class={% if page=="resources" %} "selected" {% endif %}>
+        Resources
+      </a>
+      <a href="{{ url_for('feedback') }}" class={% if page=="feedback" %} "selected" {% endif %}>
+        Feedback
+      </a>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+  </div>
+
+  <div class="footer">
+    <small>Visit the <a href="https://www.utsc.utoronto.ca/cms/faculty-of-computer-science" target="_blank">Faculty of
+        Computer Science
+        at UTSC</a></small>
+    <small>Site created by Lia Weng, Alyssa Labre, Afnan Rahman</small>
+  </div>
+</body>
+
+</html>

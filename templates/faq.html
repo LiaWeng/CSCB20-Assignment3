@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap"
+    rel="stylesheet">
+  <title>CSCB20</title>
+</head>
+
+<body>
+  {% extends "template.html" %}
+  {% block content %}
+
+  <div class="content">
+    <h1 class="page-title">Frequently Asked Questions</h1>
+    <p class="message">This page includes the frequently asked questions in the course.</p>
+
+    <ol>
+      <div class="description">
+        <li class="question">
+          What tools do you need for this course?
+        </li>
+        <p class="answer"> In this course, we will be using SQLite and DBbrowser for
+          the 1st half of the course.
+          <br><br>
+
+          In the 2nd half of the course, where we will be introducing
+          web development, we will be using Visual Studio Code to create
+          webpages using HTML and CSS.
+        </p>
+      </div>
+
+      <div class="description">
+        <li class="question">
+          Will there be an online option for the course?
+        </li>
+        <p class="answer"> There will be an web option until Feb 7, 2022. Afterwards,
+          all lectures and tutorials will shift to in person.
+        </p>
+      </div>
+    </ol>
+
+    <p class=" faq-subtext"> If you have any additional questions where you wish to remain anonymous, you can ask
+      them under the <a href="{{ url_for('feedback') }}">feedback</a> form.
+    </p>
+
+  </div>
+
+  {% endblock %}
+</body>

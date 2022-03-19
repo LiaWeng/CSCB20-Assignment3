@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap"
+    rel="stylesheet">
+  <title>CSCB20</title>
+</head>
+
+<body>
+  {% extends "template.html" %}
+  {% block content %}
+
+  <div class="content">
+    <h1 class="page-title">Announcements</h1>
+
+    <p class="message">This page includes all the key announcements and updates in the course. It will be
+      monitored and updated throughout the semester.</p>
+
+    <div class="description">
+      <h2>WebOption for B20</h2>
+      <p class="date">Posted on Feb 1, 2022</p>
+      <p>
+        In person lectures before reading week will be recorded via webOption.The recordings
+        will be posted in Quercus in the course's Kaltura Media Gallery (typically posted within 24 hours).
+      </p>
+      <p><strong>Important: </strong> Mid term exam will be in person.</p>
+    </div>
+
+    <div class="description">
+      <h2>Moving in-person starting Feb 7</h2>
+      <p class="date">Posted on Jan 21, 2022</p>
+      <p>We are moving all lectures, tutorials in person starting February 7th.</p>
+      <p>Office hours might vary. Purva's OH will be online. TA's office hours will be announced sometime next week.
+      </p>
+      <p>
+        <strong>Important: </strong> The midterm and final exam will be in person only. Online exam is not an
+        option.
+      </p>
+    </div>
+  </div>
+
+  {% endblock %}
+</body>
