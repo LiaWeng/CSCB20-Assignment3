@@ -1,11 +1,12 @@
 from flask import Flask, render_template, request
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'secret_key'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///notes.db'
+db = SQLAlchemy(app)
 
 @app.route('/')
-def root():
-    return render_template('home.html', page='home')
-
 @app.route('/home')
 def home():
     return render_template('home.html', page='home')
