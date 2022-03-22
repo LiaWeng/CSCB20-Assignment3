@@ -47,10 +47,14 @@
     {% if messages %}
 
     {% for category, message in messages %}
-    <div class="message-{{category}}">{{message}} Proceed to <a href={{url_for('login_student')}}>log in</a>.</div>
+    <div class="message-{{category}}">{{message}}</div>
 
-    {% if category == 'success'%}
-    <p class="to-login"></p>
+    {% if category == 'success' and type == 'student' %}
+    <p class="to-login">Proceed to <a href={{url_for("login_student")}}>log in</a>.</p>
+    {% endif %}
+
+    {% if category == 'success' and type == 'instructor' %}
+    <p class="to-login">Proceed to <a href={{url_for("login_instructor")}}>log in</a>.</p>
     {% endif %}
 
     {% endfor %}

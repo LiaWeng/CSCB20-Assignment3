@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for, redirect, flash
+from flask import Flask, render_template, request, url_for, redirect, flash, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 
@@ -38,11 +38,12 @@ class Instructor(db.Model):
         return f"Instructor('{self.username}', '{self.first_name}', '{self.last_name}')"
 
 
+# add date time
 class Remark(db.Model):
     __tablename__ = 'Remark'
     id = db.Column(db.Integer, primary_key=True)
-    student_id = db.Column(db.Integer, db.ForeignKey(
-        'Student.id'), nullable=False)
+    student_username = db.Column(db.String(20), db.ForeignKey(
+        'Student.username'), nullable=False)
     student_first_name = db.Column(db.String(40), nullable=False)
     student_last_name = db.Column(db.String(40), nullable=False)
     item = db.Column(db.String(20), nullable=False)
@@ -61,32 +62,12 @@ def root():
     return render_template('root.html')
 
 
-@app.route('/login-student', methods=['GET', 'POST'])
-def login_student():
-    if request.method == 'GET':
-        return render_template('login.html', type='student')
-
-
-@app.route('/login-instructor', methods=['GET', 'POST'])
-def login_instructor():
-    if request.method == 'GET':
-        return render_template('login.html', type='instructor')
-
-
 @app.route('/register-student', methods=['GET', 'POST'])
 def register_student():
     if request.method == 'GET':
         return render_template('register.html', type='student')
     else:
-        try:
-            user = format_user(request.form)
-            add_student(user)
-            flash(
-                f"Successfully registered {request.form['username']}.", 'success')
-        except Exception as err:
-            flash("This username already exists. Please choose a new one.", 'error')
-
-        return render_template('register.html', type='student')
+        return register(request.form['username'], request.form['first_name'], request.form['last_name'], request.form['password'], 'student')
 
 
 @app.route('/register-instructor', methods=['GET', 'POST'])
@@ -94,15 +75,23 @@ def register_instructor():
     if request.method == 'GET':
         return render_template('register.html', type='instructor')
     else:
-        try:
-            user = format_user(request.form)
-            add_instructor(user)
-            flash(
-                f"Successfully registered {request.form['username']}.", 'success')
-        except Exception as err:
-            flash("This username already exists. Please choose a new one.", 'error')
+        return register(request.form['username'], request.form['first_name'], request.form['last_name'], request.form['password'], 'instructor')
 
-        return render_template('register.html', type='instructor')
+
+@app.route('/login-student', methods=['GET', 'POST'])
+def login_student():
+    if request.method == 'GET':
+        return render_template('login.html', type='student')
+    else:
+        return login(request.form['username'], request.form['password'], 'student')
+
+
+@app.route('/login-instructor', methods=['GET', 'POST'])
+def login_instructor():
+    if request.method == 'GET':
+        return render_template('login.html', type='instructor')
+    else:
+        return login(request.form['username'], request.form['password'], 'instructor')
 
 
 @app.route('/home')
@@ -165,30 +154,48 @@ def feedback():
     return render_template('feedback.html', page='feedback')
 
 
-def add_student(user):
-    user = Student(username=user[0], password=user[3],
-                   first_name=user[1], last_name=user[2])
-    db.session.add(user)
-    db.session.commit()
+def register(username, first_name, last_name, password, type_user):
+    password_hash = bcrypt.generate_password_hash(password)
+
+    try:
+        if type_user == 'student':
+            user = Student(username=username,
+                           first_name=first_name, last_name=last_name, password=password_hash)
+        else:
+            user = Instructor(username=username,
+                              first_name=first_name, last_name=last_name, password=password_hash)
+
+        db.session.add(user)
+        db.session.commit()
+
+        flash(
+            f"Successfully registered {request.form['username']}.", 'success')
+    except Exception as err:
+        flash("This username already exists. Please choose a new one.", 'error')
+
+    return render_template('register.html', type=type_user)
 
 
-def add_instructor(user):
-    user = Instructor(username=user[0], password=user[3],
-                      first_name=user[1], last_name=user[2])
-    db.session.add(user)
-    db.session.commit()
+def login(username, password, type_user):
+    session.pop("user", None)
 
+    if type_user == 'student':
+        user = Student.query.filter_by(
+            username=username).first()
+    else:
+        user = Instructor.query.filter_by(
+            username=username).first()
 
-def format_user(request):
-    password_hash = bcrypt.generate_password_hash(
-        request['password'])
-    user = (
-        request['username'],
-        request['first_name'],
-        request['last_name'],
-        password_hash
-    )
-    return user
+    if not user:
+        flash("Username does not exist.", 'error')
+        return render_template('login.html', type=type_user)
+    elif not bcrypt.check_password_hash(
+            user.password, password):
+        flash("Incorrect password.", 'error')
+        return render_template('login.html', type=type_user)
+    else:
+        session['user'] = user.username
+        return redirect(url_for('home'))
 
 
 if __name__ == '__main__':
