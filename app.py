@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for, redirect, flash, session
+from flask import Flask, render_template, request, url_for, redirect, flash, session, abort
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 
@@ -94,63 +94,86 @@ def login_instructor():
         return login(request.form['username'], request.form['password'], 'instructor')
 
 
+@app.route('/logout')
+def logout():
+    session.pop('user', None)
+    session.pop('type', None)
+    return render_template('root.html')
+
+
 @app.route('/home')
 def home():
+    check_authorization()
     return render_template('home.html', page='home')
+
+
+@app.route('/grades')
+def grades():
+    check_authorization()
+
+    if session['type'] == 'student':
+        return render_template('grades_s.html', page='grades')
+    else:
+        return render_template('grades_i.html', page='grades')
 
 
 @app.route('/team')
 def team():
+    check_authorization()
     return render_template('team.html', page='team')
 
 
 @app.route('/calendar')
 def calendar():
+    check_authorization()
     return render_template('calendar.html', page='calendar')
 
 
 @app.route('/announcements')
 def announcements():
+    check_authorization()
     return render_template('announcements.html', page='announcements')
-
-
-@app.route('/grades')
-def grades():
-    return 'grades'
 
 
 @app.route('/lectures')
 def lectures():
+    check_authorization()
     return render_template('lectures.html', page='lectures')
 
 
 @app.route('/tutorials')
 def tutorials():
+    check_authorization()
     return render_template('tutorials.html', page='tutorials')
 
 
 @app.route('/assignments')
 def assignments():
+    check_authorization()
     return render_template('assignments.html', page='assignments')
 
 
 @app.route('/tests')
 def tests():
+    check_authorization()
     return render_template('tests.html', page='tests')
 
 
 @app.route('/faq')
 def faq():
+    check_authorization()
     return render_template('faq.html', page='faq')
 
 
 @app.route('/resources')
 def resources():
+    check_authorization()
     return render_template('resources.html', page='resources')
 
 
 @app.route('/feedback')
 def feedback():
+    check_authorization()
     return render_template('feedback.html', page='feedback')
 
 
@@ -177,7 +200,8 @@ def register(username, first_name, last_name, password, type_user):
 
 
 def login(username, password, type_user):
-    session.pop("user", None)
+    session.pop('user', None)
+    session.pop('type', None)
 
     if type_user == 'student':
         user = Student.query.filter_by(
@@ -195,7 +219,13 @@ def login(username, password, type_user):
         return render_template('login.html', type=type_user)
     else:
         session['user'] = user.username
+        session['type'] = type_user
         return redirect(url_for('home'))
+
+
+def check_authorization():
+    if "user" not in session:
+        abort(403, "Please sign in to access this page.")
 
 
 if __name__ == '__main__':

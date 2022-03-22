@@ -18,7 +18,7 @@
     <h2>CSCB20 <span class="course-title">Introduction to Databases and Web Applications</span></h2>
     <div class="header-right">
       <p>Welcome {{session['user']}}!</p>
-      <button class="logout-button">Log out</button>
+      <a href="{{url_for('logout')}}"><button class="logout-button">Log out</button></a>
     </div>
   </div>
 
