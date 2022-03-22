@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap"
+    rel="stylesheet">
+  <title>CSCB20</title>
+</head>
+
+<body>
+  <div class="login-register-form">
+    <form class="description" action="http://127.0.0.1:5000/login-{{type}}" method="post">
+      <h2>Log in as {{type}}</h2>
+
+      <div class="form-item">
+        <label for="username">Username &nbsp;</label>
+        <input type="text" id="username" name="username">
+      </div>
+
+      <div class="form-item">
+        <label for="password">Password &nbsp;</label>
+        <input type="password" id="password" name="password">
+      </div>
+
+      <div class="form-item">
+        <button type="submit">Login</button>
+      </div>
+    </form>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+
+    {% for category, message in messages %}
+    <div class="message-{{category}}">{{message}}</div>
+    {% endfor %}
+
+    {% endif %}
+    {% endwith %}
+  </div>
+</body>
