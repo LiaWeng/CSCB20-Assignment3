@@ -18,16 +18,20 @@
   {% block content %}
 
   <div class="content">
-    <h1 class="page-title"> Feedback Form</h1>
+    <h1 class="page-title">Feedback Responses</h1>
 
-    <form class="feedback-form">
-      <label for="feedback-box">Let us know if you have any questions or feedbacks regarding the course. Your
-        response
-        will remain anonymous
-        in the form below.</label>
-      <textarea id="feedback-box"></textarea>
-      <button type="submit">Submit</button>
-    </form>
+    {% for feedback in feedbacks %}
+    <div class="description">
+      <h2>Feedback {{feedback.id}}</h2>
+      <ol class="feedback-response" type="a">
+        <li>{{feedback.q1}}</li>
+        <li>{{feedback.q2}}</li>
+        <li>{{feedback.q3}}</li>
+        <li>{{feedback.q4}}</li>
+      </ol>
+    </div>
+    {% endfor%}
+
   </div>
 
   {% endblock %}

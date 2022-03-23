@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap"
+    rel="stylesheet">
+  <title>CSCB20</title>
+</head>
+
+<body>
+  {% extends "template.html" %}
+  {% block content %}
+
+  <div class="content">
+    <h1 class="page-title">Feedback Form</h1>
+    <p class="message" id="feedback-message">Please fill out this anonymous feedback form. It would greatly help the
+      instructor and TAs of the
+      class.</p>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+
+    {% for category, message in messages %}
+    <div class="message-{{category}}">{{message}}</div>
+    {% endfor %}
+
+    {% endif %}
+    {% endwith %}
+
+    <form class="feedback-form" action="http://127.0.0.1:5000/feedback" method="post">
+      <label for="q1">(a) What do you like about the instructor teaching?</label>
+      <textarea id="q1" name="q1" maxlength="1000"></textarea>
+
+      <label for="q2">(b) What do you recommend the instructor to do to improve their teaching?</label>
+      <textarea id="q2" name="q2" maxlength="1000"></textarea>
+
+      <label for="q3">(c) What do you like about the labs?</label>
+      <textarea id="q3" name="q3" maxlength="1000"></textarea>
+
+      <label for="q4">(d) What do you recommend the lab instructors to do to improve their lab teaching?</label>
+      <textarea id="q4" name="q4" maxlength="1000"></textarea>
+      <div>
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+
+  {% endblock %}
+</body>

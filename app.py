@@ -4,7 +4,7 @@ from flask_bcrypt import Bcrypt
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret_key'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///b20.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///assignment3.db'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 
@@ -54,7 +54,10 @@ class Remark(db.Model):
 class Feedback(db.Model):
     __tablename__ = 'Feedback'
     id = db.Column(db.Integer, primary_key=True)
-    feedback = db.Column(db.String(1000), nullable=False)
+    q1 = db.Column(db.String(1000), nullable=False)
+    q2 = db.Column(db.String(1000), nullable=False)
+    q3 = db.Column(db.String(1000), nullable=False)
+    q4 = db.Column(db.String(1000), nullable=False)
 
 
 @app.route('/')
@@ -117,6 +120,20 @@ def grades():
         return render_template('grades_i.html', page='grades')
 
 
+@app.route('/feedback', methods=['GET', 'POST'])
+def feedback():
+    check_authorization()
+
+    if request.method == 'GET':
+        if session['type'] == 'student':
+            return render_template('feedback_s.html', page='feedback')
+        else:
+            feedbacks = get_feedback()
+            return render_template('feedback_i.html', page='feedback', feedbacks=feedbacks)
+    else:
+        return add_feedback(request.form["q1"], request.form["q2"], request.form["q3"], request.form["q4"])
+
+
 @app.route('/team')
 def team():
     check_authorization()
@@ -171,12 +188,6 @@ def resources():
     return render_template('resources.html', page='resources')
 
 
-@app.route('/feedback')
-def feedback():
-    check_authorization()
-    return render_template('feedback.html', page='feedback')
-
-
 def register(username, first_name, last_name, password, type_user):
     password_hash = bcrypt.generate_password_hash(password)
 
@@ -226,6 +237,22 @@ def login(username, password, type_user):
 def check_authorization():
     if "user" not in session:
         abort(403, "Please sign in to access this page.")
+
+
+def add_feedback(q1, q2, q3, q4):
+    try:
+        feedback = Feedback(q1=q1, q2=q2, q3=q3, q4=q4)
+        db.session.add(feedback)
+        db.session.commit()
+        flash("Thank you for submitting your feedback.", 'success')
+    except Exception as err:
+        flash("Error submitting feedback.", 'error')
+
+    return render_template('feedback_s.html', page='feedback')
+
+
+def get_feedback():
+    return Feedback.query.all()
 
 
 if __name__ == '__main__':

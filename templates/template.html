@@ -30,6 +30,9 @@
       <a href="{{ url_for('grades') }}" class={% if page=="grades" %} "selected" {% endif %}>
         Grades
       </a>
+      <a href="{{ url_for('feedback') }}" class={% if page=="feedback" %} "selected" {% endif %}>
+        Feedback
+      </a>
       <a href="{{ url_for('team') }}" class={% if page=="team" %} "selected" {% endif %}>
         Course&nbsp;Team
       </a>
@@ -56,9 +59,6 @@
       </a>
       <a href="{{ url_for('resources') }}" class={% if page=="resources" %} "selected" {% endif %}>
         Resources
-      </a>
-      <a href="{{ url_for('feedback') }}" class={% if page=="feedback" %} "selected" {% endif %}>
-        Feedback
       </a>
     </nav>
 
