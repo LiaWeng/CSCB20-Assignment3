@@ -18,11 +18,21 @@
   {% block content %}
 
   <div class="content">
-    <h1 class="page-title">Feedback Responses</h1>
+    <h1 class="page-title">Questions</h1>
+
+    <div class="description">
+      <ol class="feedback-response" type="a">
+        <li>What do you like about the instructor teaching?</li>
+        <li>What do you recommend the instructor to do to improve their teaching?</li>
+        <li>What do you like about the labs?</li>
+        <li>What do you recommend the lab instructors to do to improve their lab teaching?</li>
+      </ol>
+    </div>
+
+    <h1 class="page-title">Responses</h1>
 
     {% for feedback in feedbacks %}
     <div class="description">
-      <h2>Feedback {{feedback.id}}</h2>
       <ol class="feedback-response" type="a">
         <li>{{feedback.q1}}</li>
         <li>{{feedback.q2}}</li>

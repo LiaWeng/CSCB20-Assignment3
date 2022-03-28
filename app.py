@@ -54,6 +54,8 @@ class Remark(db.Model):
 class Feedback(db.Model):
     __tablename__ = 'Feedback'
     id = db.Column(db.Integer, primary_key=True)
+    instructor_username = db.Column(db.String(20), db.ForeignKey(
+        'Instructor.username'), nullable=False)
     q1 = db.Column(db.String(1000), nullable=False)
     q2 = db.Column(db.String(1000), nullable=False)
     q3 = db.Column(db.String(1000), nullable=False)
@@ -123,15 +125,16 @@ def grades():
 @app.route('/feedback', methods=['GET', 'POST'])
 def feedback():
     check_authorization()
+    instructors = get_instructors()
 
     if request.method == 'GET':
         if session['type'] == 'student':
-            return render_template('feedback_s.html', page='feedback')
+            return render_template('feedback_s.html', page='feedback', instructors=instructors)
         else:
-            feedbacks = get_feedback()
+            feedbacks = get_feedback(session['user'])
             return render_template('feedback_i.html', page='feedback', feedbacks=feedbacks)
     else:
-        return add_feedback(request.form["q1"], request.form["q2"], request.form["q3"], request.form["q4"])
+        return add_feedback(request.form["instructor"], request.form["q1"], request.form["q2"], request.form["q3"], request.form["q4"], instructors)
 
 
 @app.route('/team')
@@ -239,20 +242,25 @@ def check_authorization():
         abort(403, "Please sign in to access this page.")
 
 
-def add_feedback(q1, q2, q3, q4):
+def add_feedback(instructor, q1, q2, q3, q4, instructors):
     try:
-        feedback = Feedback(q1=q1, q2=q2, q3=q3, q4=q4)
+        feedback = Feedback(instructor_username=instructor,
+                            q1=q1, q2=q2, q3=q3, q4=q4)
         db.session.add(feedback)
         db.session.commit()
         flash("Thank you for submitting your feedback.", 'success')
     except Exception as err:
         flash("Error submitting feedback.", 'error')
 
-    return render_template('feedback_s.html', page='feedback')
+    return render_template('feedback_s.html', page='feedback', instructors=instructors)
 
 
-def get_feedback():
-    return Feedback.query.all()
+def get_instructors():
+    return Instructor.query.all()
+
+
+def get_feedback(username):
+    return Feedback.query.filter_by(instructor_username=username)
 
 
 if __name__ == '__main__':

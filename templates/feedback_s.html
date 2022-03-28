@@ -34,6 +34,14 @@
     {% endwith %}
 
     <form class="feedback-form" action="http://127.0.0.1:5000/feedback" method="post">
+      <label for="instructor">Please select instructor.</label>
+
+      <select name="instructor">
+        {% for instructor in instructors %}
+        <option value={{instructor.username}}>{{instructor.first_name}} {{instructor.last_name}}</option>
+        {% endfor %}
+      </select>
+
       <label for="q1">(a) What do you like about the instructor teaching?</label>
       <textarea id="q1" name="q1" maxlength="1000"></textarea>
 
