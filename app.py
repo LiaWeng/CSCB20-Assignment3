@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'secret_key'
+app.config['SECRET_KEY'] = '66556A586E3272357538782F413F4428'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///assignment3.db'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
