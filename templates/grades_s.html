@@ -23,6 +23,30 @@
     <div class="description">
       student's view
     </div>
+
+    <h1 class="page-title">Remark Request Form</h1>
+
+    <p class="message">
+      If you think that your work has been incorrectly graded, you may submit a remark request using the form below. The
+      instructor and TAs of the course will get back to you as soon as possible.
+    </p>
+
+    <form class="remark-form" action="http://127.0.0.1:5000/grades" method="post">
+      <div class="item-dropdown remark-form-element">
+        <label for="item">Item:</label>
+        <select name="item" id="item">
+          <option value="a1">Assignment 1</option>
+          <option value="a2">Assignment 2</option>
+          <option value="a3">Assignment 3</option>
+          <option value="midterm">Midterm</option>
+        </select>
+      </div>
+
+      <div class="remark-form-element">
+        <label for="reason">Reason for remark:</label>
+        <textarea id="reason" name="reason"></textarea>
+      </div>
+    </form>
   </div>
 
   {% endblock %}

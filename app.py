@@ -1,3 +1,4 @@
+from datetime import timedelta
 from flask import Flask, render_template, request, url_for, redirect, flash, session, abort
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
@@ -5,6 +6,7 @@ from flask_bcrypt import Bcrypt
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '66556A586E3272357538782F413F4428'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///assignment3.db'
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=15)
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 
@@ -64,7 +66,10 @@ class Feedback(db.Model):
 
 @app.route('/')
 def root():
-    return render_template('root.html')
+    if 'user' in session:
+        return render_template('home.html')
+    else:
+        return render_template('root.html')
 
 
 @app.route('/register-student', methods=['GET', 'POST'])
@@ -117,7 +122,8 @@ def grades():
     check_authorization()
 
     if session['type'] == 'student':
-        return render_template('grades_s.html', page='grades')
+        student = get_student(session['user'])
+        return render_template('grades_s.html', page='grades', student=student)
     else:
         return render_template('grades_i.html', page='grades')
 
@@ -234,6 +240,7 @@ def login(username, password, type_user):
     else:
         session['user'] = user.username
         session['type'] = type_user
+        session.permanent = True
         return redirect(url_for('home'))
 
 
@@ -257,6 +264,10 @@ def add_feedback(instructor, q1, q2, q3, q4, instructors):
 
 def get_instructors():
     return Instructor.query.all()
+
+
+def get_student(username):
+    return Student.query.filter_by(username=username).first()
 
 
 def get_feedback(username):
