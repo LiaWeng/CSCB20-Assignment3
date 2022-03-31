@@ -40,7 +40,6 @@ class Instructor(db.Model):
         return f"Instructor('{self.username}', '{self.first_name}', '{self.last_name}')"
 
 
-# add date time
 class Remark(db.Model):
     __tablename__ = 'Remark'
     id = db.Column(db.Integer, primary_key=True)
