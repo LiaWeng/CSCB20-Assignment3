@@ -116,16 +116,19 @@ def home():
     return render_template('home.html', page='home')
 
 
-@app.route('/grades')
+@app.route('/grades', methods=['GET', 'POST'])
 def grades():
     check_authorization()
     students = get_allstudents()
-
-    if session['type'] == 'student':
-        student = get_student(session['user'])
-        return render_template('grades_s.html', page='grades', student=student)
+    
+    if request.method == 'GET':
+        if session['type'] == 'student':
+            student = get_student(session['user'])
+            return render_template('grades_s.html', page='grades', student=student)
+        else:
+            return render_template('grades_i.html', page='grades', students=students)
     else:
-        return render_template('grades_i.html', page='grades', students=students)
+        return add_grades(request.form["student"], request.form["a1"], request.form["a2"], request.form["a3"], request.form["midterm"], students=students)
 
 
 @app.route('/feedback', methods=['GET', 'POST'])
@@ -269,8 +272,28 @@ def get_instructors():
 def get_student(username):
     return Student.query.filter_by(username=username).first()
 
+
 def get_allstudents():
     return Student.query.all()
+
+
+def add_grades(username, a1, a2, a3, midterm, students):
+    try:
+        # grade = Student(username=username,
+        #                 a1=a1, a2=a2, a3=a3, midterm=midterm)
+        # db.session.add(grade)
+        # db.session.commit()
+        student = Student.query.filter_by(username=username)
+        student.a1 = a1
+        student.a2 = a2
+        student.a3 = a3
+        student.midterm = midterm
+        db.session.update(grade)
+        db.session.commit()
+        flash("Grades submitted successfully.", 'success')
+    except Exception as err:
+        flash("Error submitting grades.", 'error')
+    return render_template('grades_i.html', page='grades', grades=grades, students=students)
 
 
 def get_feedback(username):
