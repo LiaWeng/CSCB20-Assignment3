@@ -120,7 +120,7 @@ def home():
 def grades():
     check_authorization()
     students = get_allstudents()
-    
+
     if request.method == 'GET':
         if session['type'] == 'student':
             student = get_student(session['user'])
@@ -279,16 +279,11 @@ def get_allstudents():
 
 def add_grades(username, a1, a2, a3, midterm, students):
     try:
-        # grade = Student(username=username,
-        #                 a1=a1, a2=a2, a3=a3, midterm=midterm)
-        # db.session.add(grade)
-        # db.session.commit()
-        student = Student.query.filter_by(username=username)
+        student = Student.query.filter_by(username=username).first()
         student.a1 = a1
         student.a2 = a2
         student.a3 = a3
         student.midterm = midterm
-        db.session.update(grade)
         db.session.commit()
         flash("Grades submitted successfully.", 'success')
     except Exception as err:
