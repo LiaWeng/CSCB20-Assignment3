@@ -351,6 +351,32 @@ nav a:hover {
   width: 100%;
 }
 
+.table-display {
+  width: max-content;
+  text-align: center;
+}
+
+td, th {
+  padding: 10px;
+}
+
+.addgrades-form {
+  margin: 2rem 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.addgrades-form-element {
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-start;
+}
+
+.addgrades-form textarea {
+  width: 100%;
+}
+
 /* team page */
 
 @media screen and (max-width: 1023px) {
