@@ -21,7 +21,7 @@
     <h1 class="page-title">Remark Requests</h1>
 
     <div class="description">
-      instructor's view
+      instructor's view of remarks
     </div>
 
     <h1 class="page-title">Grades</h1>
@@ -31,6 +31,7 @@
         <tr>
           <th>Last Name</th>
           <th>First Name</th>
+          <th>Username</th>
           <th>Assignment 1</th>
           <th>Assignment 2</th>
           <th>Assignment 3</th>
@@ -40,6 +41,7 @@
         <tr>
           <td>{{student.last_name}}</td>
           <td>{{student.first_name}}</td>
+          <td>{{student.username}}</td>
           <td>{{student.a1}}</td>
           <td>{{student.a2}}</td>
           <td>{{student.a3}}</td>
@@ -48,6 +50,34 @@
         {% endfor%}
       </table>
     </div>
+
+    <p class="message">Add or edit grades here.</p>
+
+    <form class="addgrades-form" action="http://127.0.0.1:5000/grades" method="post">
+      <label for="student">Please select student.</label>
+
+      <select name="student">
+        {% for student in students %}
+        <option value={{student.username}}>{{student.first_name}} {{student.last_name}}</option>
+        {% endfor %}
+      </select>
+
+      <label for="a1">Input grade for Assignment 1.</label>
+      <textarea id="a1" name="a1" maxlength="3"></textarea>
+
+      <label for="a2">Input grade for Assignment 2.</label>
+      <textarea id="a2" name="a2" maxlength="3"></textarea>
+
+      <label for="a3">Input grade for Assignment 3.</label>
+      <textarea id="a3" name="a3" maxlength="3"></textarea>
+
+      <label for="midterm">Input grade for Midterm.</label>
+      <textarea id="midterm" name="midterm" maxlength="midterm"></textarea>
+      
+      <div>
+        <button type="submit">Submit</button>
+      </div>
+    </form>
   </div>
 
   {% endblock %}
