@@ -119,6 +119,7 @@ def home():
 @app.route('/grades', methods=['GET', 'POST'])
 def grades():
     check_authorization()
+    remarks = get_remarks()
     students = get_allstudents()
 
     if request.method == 'GET':
@@ -126,10 +127,9 @@ def grades():
             student = get_student(session['user'])
             return render_template('grades_s.html', page='grades', student=student)
         else:
-            return render_template('grades_i.html', page='grades', students=students)
+            return render_template('grades_i.html', page='grades', remarks=remarks, students=students)
     else:
         return add_grades(request.form["student"], request.form["a1"], request.form["a2"], request.form["a3"], request.form["midterm"], students=students)
-
 
 @app.route('/feedback', methods=['GET', 'POST'])
 def feedback():
@@ -277,7 +277,12 @@ def get_allstudents():
     return Student.query.all()
 
 
+def get_remarks():
+    return Remark.query.all()
+
+
 def add_grades(username, a1, a2, a3, midterm, students):
+    remarks = get_remarks()
     try:
         student = Student.query.filter_by(username=username).first()
         student.a1 = a1
@@ -288,7 +293,8 @@ def add_grades(username, a1, a2, a3, midterm, students):
         flash("Grades submitted successfully.", 'success')
     except Exception as err:
         flash("Error submitting grades.", 'error')
-    return render_template('grades_i.html', page='grades', grades=grades, students=students)
+    return render_template('grades_i.html', page='grades', grades=grades, students=students, remarks=remarks)
+
 
 
 def get_feedback(username):
