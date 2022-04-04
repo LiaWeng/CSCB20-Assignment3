@@ -27,7 +27,26 @@
     <h1 class="page-title">Grades</h1>
 
     <div class="description">
-      instructor's view
+      <table class="grade-display">
+        <tr>
+          <th>Last Name</th>
+          <th>First Name</th>
+          <th>Assignment 1</th>
+          <th>Assignment 2</th>
+          <th>Assignment 3</th>
+          <th>Midterm</th>
+        </tr>
+        {% for student in students %}
+        <tr>
+          <td>{{student.last_name}}</td>
+          <td>{{student.first_name}}</td>
+          <td>{{student.a1}}</td>
+          <td>{{student.a2}}</td>
+          <td>{{student.a3}}</td>
+          <td>{{student.midterm}}</td>
+        </tr>
+        {% endfor%}
+      </table>
     </div>
   </div>
 
