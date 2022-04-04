@@ -119,12 +119,13 @@ def home():
 @app.route('/grades')
 def grades():
     check_authorization()
+    students = get_allstudents()
 
     if session['type'] == 'student':
         student = get_student(session['user'])
         return render_template('grades_s.html', page='grades', student=student)
     else:
-        return render_template('grades_i.html', page='grades')
+        return render_template('grades_i.html', page='grades', students=students)
 
 
 @app.route('/feedback', methods=['GET', 'POST'])
@@ -267,6 +268,9 @@ def get_instructors():
 
 def get_student(username):
     return Student.query.filter_by(username=username).first()
+
+def get_allstudents():
+    return Student.query.all()
 
 
 def get_feedback(username):
