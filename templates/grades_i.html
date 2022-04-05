@@ -18,11 +18,10 @@
   {% block content %}
 
   <div class="content">
-
     <h1 class="page-title">Grades</h1>
 
-    <div class="description">
-      <table class="table-display">
+    <div class="table-container-grades">
+      <table>
         <tr>
           <th>Last Name</th>
           <th>First Name</th>
@@ -48,8 +47,8 @@
 
     <h1 class="page-title">Remark Requests</h1>
 
-    <div class="description">
-      <table class="table-display">
+    <div class="table-container-grades">
+      <table>
         <tr>
           <th>Last Name</th>
           <th>First Name</th>
@@ -90,18 +89,26 @@
         {% endfor %}
       </select>
 
-      <label for="a1">Input grade for Assignment 1.</label>
-      <textarea id="a1" name="a1" maxlength="3"></textarea>
+      <div class="grade-input">
+        <label for="a1">Input grade for Assignment 1.</label>
+        <input id="a1" name="a1" type="text">
+      </div>
 
-      <label for="a2">Input grade for Assignment 2.</label>
-      <textarea id="a2" name="a2" maxlength="3"></textarea>
+      <div class="grade-input">
+        <label for="a2">Input grade for Assignment 2.</label>
+        <input id="a2" name="a2" type="text">
+      </div>
 
-      <label for="a3">Input grade for Assignment 3.</label>
-      <textarea id="a3" name="a3" maxlength="3"></textarea>
+      <div class="grade-input">
+        <label for="a3">Input grade for Assignment 3.</label>
+        <input id="a3" name="a3" type="text">
+      </div>
 
-      <label for="midterm">Input grade for Midterm.</label>
-      <textarea id="midterm" name="midterm" maxlength="midterm"></textarea>
-      
+      <div class="grade-input">
+        <label for="midterm">Input grade for Midterm.</label>
+        <input id="midterm" name="midterm" type="text">
+      </div>
+
       <div>
         <button type="submit">Submit</button>
       </div>
