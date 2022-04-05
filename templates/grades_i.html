@@ -21,13 +21,40 @@
     <h1 class="page-title">Remark Requests</h1>
 
     <div class="description">
-      instructor's view of remarks
+      <table class="table-display">
+        <tr>
+          <th>Last Name</th>
+          <th>First Name</th>
+          <th>Username</th>
+          <th>Assessment</th>
+          <th>Grade</th>
+          <th>Reason</th>
+          <th>Request ID</th>
+          <th></th>
+        </tr>
+        {% for remark in remarks %}
+        <tr>
+          <td>{{remark.student_last_name}}</td>
+          <td>{{remark.student_first_name}}</td>
+          <td>{{remark.student_username}}</td>
+          <td>{{remark.item}}</td>
+          <td>{{remark.grade}}</td>
+          <td>{{remark.reason}}</td>
+          <td>{{remark.id}}</td>
+          <td>
+            <a href="/closeremark/{{remark.id}}">
+              <button type="close">Close request</button>
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
     </div>
 
     <h1 class="page-title">Grades</h1>
 
     <div class="description">
-      <table class="grade-display">
+      <table class="table-display">
         <tr>
           <th>Last Name</th>
           <th>First Name</th>
