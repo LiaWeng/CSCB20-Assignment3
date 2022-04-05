@@ -18,6 +18,34 @@
   {% block content %}
 
   <div class="content">
+
+    <h1 class="page-title">Grades</h1>
+
+    <div class="description">
+      <table class="table-display">
+        <tr>
+          <th>Last Name</th>
+          <th>First Name</th>
+          <th>Username</th>
+          <th>Assignment 1</th>
+          <th>Assignment 2</th>
+          <th>Assignment 3</th>
+          <th>Midterm</th>
+        </tr>
+        {% for student in students %}
+        <tr>
+          <td>{{student.last_name}}</td>
+          <td>{{student.first_name}}</td>
+          <td>{{student.username}}</td>
+          <td>{{student.a1}}</td>
+          <td>{{student.a2}}</td>
+          <td>{{student.a3}}</td>
+          <td>{{student.midterm}}</td>
+        </tr>
+        {% endfor%}
+      </table>
+    </div>
+
     <h1 class="page-title">Remark Requests</h1>
 
     <div class="description">
@@ -48,33 +76,6 @@
           </td>
         </tr>
         {% endfor %}
-      </table>
-    </div>
-
-    <h1 class="page-title">Grades</h1>
-
-    <div class="description">
-      <table class="table-display">
-        <tr>
-          <th>Last Name</th>
-          <th>First Name</th>
-          <th>Username</th>
-          <th>Assignment 1</th>
-          <th>Assignment 2</th>
-          <th>Assignment 3</th>
-          <th>Midterm</th>
-        </tr>
-        {% for student in students %}
-        <tr>
-          <td>{{student.last_name}}</td>
-          <td>{{student.first_name}}</td>
-          <td>{{student.username}}</td>
-          <td>{{student.a1}}</td>
-          <td>{{student.a2}}</td>
-          <td>{{student.a3}}</td>
-          <td>{{student.midterm}}</td>
-        </tr>
-        {% endfor%}
       </table>
     </div>
 
