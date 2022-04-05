@@ -131,6 +131,21 @@ def grades():
     else:
         return add_grades(request.form["student"], request.form["a1"], request.form["a2"], request.form["a3"], request.form["midterm"], students=students)
 
+
+@app.route('/closeremark/<int:id>')
+def close_remark(id):
+    request = Remark.query.filter_by(id=id).first()
+
+    try:
+        db.session.delete(request)
+        db.session.commit()
+        flash("Remark request closed successfully.", 'success')
+        return redirect('/grades')
+    
+    except Exception as err:
+        flash("Issue closing remark request.", 'error')
+
+
 @app.route('/feedback', methods=['GET', 'POST'])
 def feedback():
     check_authorization()
