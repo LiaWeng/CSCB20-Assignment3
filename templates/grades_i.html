@@ -79,6 +79,7 @@
       </table>
     </div>
 
+<<<<<<< HEAD
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
 
@@ -89,6 +90,43 @@
     {% endif %}
     {% endwith %}
 
+=======
+    <p class="message">Add or edit grades here.</p>
+
+    <form class="addgrades-form" action="http://127.0.0.1:5000/grades" method="post">
+      <label for="student">Please select student.</label>
+
+      <select name="student">
+        {% for student in students %}
+        <option value={{student.username}}>{{student.first_name}} {{student.last_name}}</option>
+        {% endfor %}
+      </select>
+
+      <div class="grade-input">
+        <label for="a1">Input grade for Assignment 1.</label>
+        <input id="a1" name="a1" type="text">
+      </div>
+
+      <div class="grade-input">
+        <label for="a2">Input grade for Assignment 2.</label>
+        <input id="a2" name="a2" type="text">
+      </div>
+
+      <div class="grade-input">
+        <label for="a3">Input grade for Assignment 3.</label>
+        <input id="a3" name="a3" type="text">
+      </div>
+
+      <div class="grade-input">
+        <label for="midterm">Input grade for Midterm.</label>
+        <input id="midterm" name="midterm" type="text">
+      </div>
+
+      <div>
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+>>>>>>> parent of 7593aa8 (instructor grade page message)
   </div>
 
   {% endblock %}
