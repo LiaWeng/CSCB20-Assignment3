@@ -125,7 +125,8 @@ def grades():
     if request.method == 'GET':
         if session['type'] == 'student':
             student = get_student(session['user'])
-            return render_template('grades_s.html', page='grades', student=student)
+            remark = get_student_remark(session['user'])
+            return render_template('grades_s.html', page='grades', remarks=remark, students=student)
         else:
             return render_template('grades_i.html', page='grades', remarks=remarks, students=students)
     else:
@@ -287,10 +288,11 @@ def get_instructors():
 def get_student(username):
     return Student.query.filter_by(username=username).first()
 
+def get_student_remark(username):
+    return Remark.query.filter_by(student_username=username)
 
 def get_allstudents():
     return Student.query.all()
-
 
 def get_remarks():
     return Remark.query.all()
