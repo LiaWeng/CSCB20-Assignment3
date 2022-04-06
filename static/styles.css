@@ -346,6 +346,10 @@ nav a:hover {
   align-items: flex-start;
 }
 
+.grade-message {
+  margin-bottom: 20px;
+}
+
 @media screen and (max-width: 551px) {
   .table-container-grades {
     overflow-x: auto;
