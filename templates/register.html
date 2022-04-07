@@ -10,10 +10,11 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap"
     rel="stylesheet">
+  <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}" defer></script>
   <title>CSCB20</title>
 </head>
 
-<body>
+<body onload="hideMessage()">
   <div class="login-register-form">
     <form class="description" action="http://127.0.0.1:5000/register-{{type}}" method="post">
       <h2>Register as {{type}}</h2>
@@ -47,7 +48,7 @@
     {% if messages %}
 
     {% for category, message in messages %}
-    <div class="message-{{category}}">{{message}}</div>
+    <div class="message-{{category}} hide">{{message}}</div>
 
     {% if category == 'success' and type == 'student' %}
     <p class="to-login">Proceed to <a href={{url_for("login_student")}}>log in</a>.</p>

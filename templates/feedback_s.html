@@ -10,10 +10,11 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap"
     rel="stylesheet">
+  <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}" defer></script>
   <title>CSCB20</title>
 </head>
 
-<body>
+<body onload="hideMessage()">
   {% extends "template.html" %}
   {% block content %}
 
@@ -27,7 +28,7 @@
     {% if messages %}
 
     {% for category, message in messages %}
-    <div class="message-{{category}}">{{message}}</div>
+    <div class="message-{{category}} hide">{{message}}</div>
     {% endfor %}
 
     {% endif %}

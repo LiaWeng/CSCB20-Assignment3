@@ -124,6 +124,10 @@ select {
   margin: 1rem 0;
 }
 
+.hidden {
+  display: none;
+}
+
 /* root page */
 
 @media screen and (max-width: 699px) {
@@ -177,14 +181,14 @@ select {
   background-color: #e5fede;
   padding: 10px 20px;
   border-radius: 10px;
-  margin: 0 20px;
+  margin: 20px 20px;
 }
 
 .message-error {
   background-color: #fee0de;
   padding: 10px 20px;
   border-radius: 10px;
-  margin: 0 20px;
+  margin: 20 20px;
 }
 
 .to-login {
@@ -332,10 +336,10 @@ nav a:hover {
   font-weight: 400;
 }
 
-/* grades page instructor */
+/* grades page student */
 
 .remark-form {
-  margin: 2rem 20px;
+  margin: 2rem 20px 3rem 20px;
   display: flex;
   flex-direction: column;
 }
@@ -345,6 +349,12 @@ nav a:hover {
   flex-direction: column;
   align-items: flex-start;
 }
+
+.remark-form-element textarea {
+  margin: 10px 0 2rem 0;
+}
+
+/* grades page instructor */
 
 @media screen and (max-width: 551px) {
   .table-container-grades {
@@ -445,6 +455,10 @@ td {
 .grade-input input {
   margin-top: 10px;
   width: 8rem;
+}
+
+.edit-grades {
+  margin-top: 20px;
 }
 
 /* team page */

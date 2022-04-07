@@ -119,18 +119,41 @@ def home():
 @app.route('/grades', methods=['GET', 'POST'])
 def grades():
     check_authorization()
-    remarks = get_remarks()
+    all_remarks = get_allremarks()
     students = get_allstudents()
 
     if request.method == 'GET':
         if session['type'] == 'student':
             student = get_student(session['user'])
-            remark = get_student_remark(session['user'])
-            return render_template('grades_s.html', page='grades', remarks=remark, students=student)
+            remarks = get_student_remark(student.username)
+            return render_template('grades_s.html', page='grades', remarks=remarks, student=student)
         else:
-            return render_template('grades_i.html', page='grades', remarks=remarks, students=students)
+            return render_template('grades_i.html', page='grades', remarks=all_remarks, students=students)
     else:
-        return add_grades(request.form["student"], request.form["a1"], request.form["a2"], request.form["a3"], request.form["midterm"], students=students)
+        return add_grades(request.form['student'], request.form['a1'], request.form['a2'], request.form['a3'], request.form['midterm'], students=students)
+
+
+@app.route('/addremark', methods=['POST'])
+def add_remark():
+    student = get_student(session['user'])
+    item = request.form['item']
+    grade = get_grade(student.username, item)
+    reason = request.form['reason']
+    remarks = get_student_remark(student.username)
+
+    try:
+        remark = Remark(student_username=student.username, student_first_name=student.first_name,
+                        student_last_name=student.last_name, item=item, grade=grade, reason=reason)
+
+        db.session.add(remark)
+        db.session.commit()
+
+        flash(
+            f"Successfully submitted remark request.", 'success')
+    except Exception as err:
+        flash("Error submitting remark request.", 'error')
+
+    return render_template('grades_s.html', page='grades', remarks=remarks, student=student)
 
 
 @app.route('/closeremark/<int:id>')
@@ -142,7 +165,7 @@ def close_remark(id):
         db.session.commit()
         flash("Remark request closed successfully.", 'success')
         return redirect('/grades')
-    
+
     except Exception as err:
         flash("Issue closing remark request.", 'error')
 
@@ -288,18 +311,21 @@ def get_instructors():
 def get_student(username):
     return Student.query.filter_by(username=username).first()
 
+
 def get_student_remark(username):
     return Remark.query.filter_by(student_username=username)
+
 
 def get_allstudents():
     return Student.query.all()
 
-def get_remarks():
+
+def get_allremarks():
     return Remark.query.all()
 
 
 def add_grades(username, a1, a2, a3, midterm, students):
-    remarks = get_remarks()
+    remarks = get_allremarks()
     try:
         student = Student.query.filter_by(username=username).first()
         student.a1 = a1
@@ -312,6 +338,17 @@ def add_grades(username, a1, a2, a3, midterm, students):
         flash("Error submitting grades.", 'error')
     return render_template('grades_i.html', page='grades', grades=grades, students=students, remarks=remarks)
 
+
+def get_grade(username, item):
+    student = Student.query.filter_by(username=username).first()
+    if item == 'a1':
+        return student.a1
+    elif item == 'a2':
+        return student.a2
+    elif item == 'a3':
+        return student.a3
+    else:
+        return student.midterm
 
 
 def get_feedback(username):

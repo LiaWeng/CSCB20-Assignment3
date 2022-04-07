@@ -10,18 +10,33 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap"
     rel="stylesheet">
+  <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}" defer></script>
   <title>CSCB20</title>
 </head>
 
-<body>
+<body onload="hideMessage()">
   {% extends "template.html" %}
   {% block content %}
 
   <div class="content">
     <h1 class="page-title">Grades</h1>
 
-    <div class="description">
-      student's view
+    <div class="table-container-grades">
+      <table>
+        <tr>
+          <th>Assignment 1</th>
+          <th>Assignment 2</th>
+          <th>Assignment 3</th>
+          <th>Midterm</th>
+          <th></th>
+        </tr>
+        <tr>
+          <td>{{student.a1}}</td>
+          <td>{{student.a2}}</td>
+          <td>{{student.a3}}</td>
+          <td>{{student.midterm}}</td>
+        </tr>
+      </table>
     </div>
 
     <h1 class="page-title">Remark Request Form</h1>
@@ -31,10 +46,20 @@
       instructor and TAs of the course will get back to you as soon as possible.
     </p>
 
-    <form class="remark-form" action="http://127.0.0.1:5000/grades" method="post">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+
+    {% for category, message in messages %}
+    <div class="message-{{category}} hide">{{message}}</div>
+    {% endfor %}
+
+    {% endif %}
+    {% endwith %}
+
+    <form class="remark-form" action="http://127.0.0.1:5000/addremark" method="post">
       <div class="item-dropdown remark-form-element">
         <label for="item">Item:</label>
-        <select name="item" id="item">
+        <select name="item" id="item" required>
           <option value="a1">Assignment 1</option>
           <option value="a2">Assignment 2</option>
           <option value="a3">Assignment 3</option>
@@ -44,9 +69,35 @@
 
       <div class="remark-form-element">
         <label for="reason">Reason for remark:</label>
-        <textarea id="reason" name="reason"></textarea>
+        <textarea id="reason" name="reason" cols="50" rows="3" required></textarea>
+      </div>
+
+      <div>
+        <button type="submit">Submit</button>
       </div>
     </form>
+
+    <h1 class="page-title">Previously Submitted Remark Requests</h1>
+
+    <div class="table-container-grades">
+      <table>
+        <tr>
+          <th>Assessment</th>
+          <th>Grade</th>
+          <th>Reason</th>
+          <th>Request ID</th>
+          <th></th>
+        </tr>
+        {% for remark in remarks %}
+        <tr>
+          <td>{{remark.item}}</td>
+          <td>{{remark.grade}}</td>
+          <td>{{remark.reason}}</td>
+          <td>{{remark.id}}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
   </div>
 
   {% endblock %}
